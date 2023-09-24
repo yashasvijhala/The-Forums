@@ -3,26 +3,6 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { nanoid } from 'nanoid'
 import { NextAuthOptions, getServerSession } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-import type { Session, User } from 'next-auth'
-import type { JWT } from 'next-auth/jwt'
-
-type UserId = string
-
-declare module 'next-auth/jwt' {
-  interface JWT {
-    id: UserId
-    username?: string | null
-  }
-}
-
-declare module 'next-auth' {
-  interface Session {
-    user: User & {
-      id: UserId
-      username?: string | null
-    }
-  }
-}
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
