@@ -1,0 +1,17 @@
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid;
+  font-size: 2em;
+  width: fit-content; /* Adjusted to 'fit-content' to match the text width */
+  animation: typing 5s steps(40, end) forwards; /* Adjusted animation */
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 32%;
+  }
+}

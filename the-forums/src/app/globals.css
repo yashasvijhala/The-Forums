@@ -73,4 +73,14 @@
   body {
     @apply bg-background text-foreground;
   }
+  body.dark {
+    background-color: #1a1a1a;
+    color: white;
+  }
+  
+html.dark {
+  background-color: black;
+  color: white;
+}
+
 }

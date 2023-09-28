@@ -23,6 +23,8 @@ export async function POST(req: Request) {
     if (subredditExists) {
       return new Response('Subreddit already exists', { status: 409 })
     }
+
+  
     const subreddit = await db.subreddit.create({
       data: {
         name,
@@ -30,6 +32,7 @@ export async function POST(req: Request) {
       },
     })
 
+    
     await db.subscription.create({
       data: {
         userId: session.user.id,

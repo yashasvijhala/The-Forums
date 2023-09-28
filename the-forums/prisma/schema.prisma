@@ -75,11 +75,17 @@ model Subreddit {
   @@index([name])
 }
 
+enum SubReditRole {
+  Normal
+  Moderator
+}
+
 model Subscription {
   user        User      @relation(fields: [userId], references: [id])
   userId      String
   subreddit   Subreddit @relation(fields: [subredditId], references: [id])
   subredditId String
+  role SubReditRole @default(Normal) 
 
   @@id([userId, subredditId])
 }

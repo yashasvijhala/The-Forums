@@ -6,6 +6,8 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
+import '@/app/globals.css' 
+import SubscribeLeaveToggle from '@/components/SubscribeLeaveToggle'
 
 export const metadata: Metadata = {
   title: 'The Forums',
@@ -62,9 +64,11 @@ const Layout = async ({
     <div className='sm:container max-w-7xl mx-auto h-full pt-12'>
       <div>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>
-          <ul className='flex flex-col col-span-2 space-y-6'>{children}</ul>
+          <ul className='flex flex-col col-span-2 space-y-6 animate__animated animate__fadeIn'>
+            {children}
+          </ul>
 
-          <div className='overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last'>
+          <div className='overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last animate__animated animate__fadeIn animate__delay-2s'>
             <div className='px-6 py-4'>
               <p className='font-semibold py-3'>About r/{subreddit.name}</p>
             </div>
@@ -88,14 +92,19 @@ const Layout = async ({
                   <dt className='text-gray-500'>You created this community</dt>
                 </div>
               ) : null}
-
-             
+              
+              {subreddit.creatorId !== session?.user?.id ? (
+                <SubscribeLeaveToggle
+                  isSubscribed={isSubscribed}
+                  subredditId={subreddit.id}
+                  subredditName={subreddit.name}
+                />
+              ) : null}
+                
               <Link
-                className={buttonVariants({
-                  variant: 'outline',
-                  className: 'w-full mb-6',
-                })}
-                href={`r/${slug}/submit`}>
+                href={`r/${slug}/submit`}
+                className='bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition duration-300 animate__animated animate__bounceIn'
+              >
                 Create Post
               </Link>
             </dl>
@@ -106,4 +115,4 @@ const Layout = async ({
   )
 }
 
-export default Layout
+export default Layout;
